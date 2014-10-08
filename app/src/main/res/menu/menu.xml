@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/main">
+<!-- Use the constants defined in the ContextualMenus.Command enum-->
+<item
+    android:id="@+id/start_climate_control"
+    android:title="@string/starthvac" />
+<item
+    android:id="@+id/stop_climate_control"
+    android:title="@string/stophvac" />
+</menu>
