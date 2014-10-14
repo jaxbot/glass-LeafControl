@@ -6,5 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="starthvac">Start climate control</string>
     <string name="stophvac">Stop climate control</string>
+    <string name="title_activity_start_hvac">StartHVACActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="startac">Starting climate control</string>
 
 </resources>

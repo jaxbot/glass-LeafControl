@@ -1,7 +1,6 @@
 package me.jaxbot.glass.leafcontrol;
 
 import com.google.android.glass.media.Sounds;
-import com.google.android.glass.view.WindowUtils;
 import com.google.android.glass.widget.CardBuilder;
 import com.google.android.glass.widget.CardScrollAdapter;
 import com.google.android.glass.widget.CardScrollView;
@@ -10,12 +9,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
+import android.speech.tts.TextToSpeech;
+;import java.util.Locale;
 
 /**
  * An {@link Activity} showing a tuggable "Hello World!" card.
@@ -26,7 +24,8 @@ import android.widget.AdapterView;
  * and use a {@link com.google.android.glass.touchpad.GestureDetector}.
  * @see <a href="https://developers.google.com/glass/develop/gdk/touch">GDK Developer Guide</a>
  */
-public class MainActivity extends Activity {
+public class StartHVACActivity extends Activity implements TextToSpeech.OnInitListener {
+    private TextToSpeech tts;
 
     /** {@link CardScrollView} to use as the main content view. */
     private CardScrollView mCardScroller;
@@ -76,6 +75,16 @@ public class MainActivity extends Activity {
         });
         setContentView(mCardScroller);
 
+        tts = new TextToSpeech(this, this);
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            tts.setLanguage(Locale.ENGLISH);
+
+            tts.speak("Starting climate control", TextToSpeech.QUEUE_FLUSH, null);
+        }
     }
 
     @Override
@@ -94,61 +103,11 @@ public class MainActivity extends Activity {
      * Builds a Glass styled "Hello World!" view using the {@link CardBuilder} class.
      */
     private View buildView() {
-        CardBuilder card = new CardBuilder(this, CardBuilder.Layout.TEXT);
+        CardBuilder card = new CardBuilder(this, CardBuilder.Layout.CAPTION);
 
-        getWindow().requestFeature(WindowUtils.FEATURE_VOICE_COMMANDS);
-        getWindow().requestFeature(Window.FEATURE_OPTIONS_PANEL);
-
-        card.setText(R.string.hello_world);
+        card.setText(R.string.startac);
+        card.addImage(R.drawable.nissan_leaf_1);
         return card.getView();
-    }
-
-    @Override
-    public boolean onCreatePanelMenu(int featureId, Menu menu) {
-        if (featureId == WindowUtils.FEATURE_VOICE_COMMANDS ||
-                featureId == Window.FEATURE_OPTIONS_PANEL) {
-            getMenuInflater().inflate(R.menu.menu, menu);
-            return true;
-        }
-        // Pass through to super to setup touch menu.
-        return super.onCreatePanelMenu(featureId, menu);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        if (featureId == WindowUtils.FEATURE_VOICE_COMMANDS ||
-                featureId == Window.FEATURE_OPTIONS_PANEL) {
-            switch (item.getItemId()) {
-                /*case R.id.dogs_menu_item:
-                    // handle top-level dogs menu item
-                    break;
-                case R.id.cats_menu_item:
-                    // handle top-level cats menu item
-                    break;
-                case R.id.lab_menu_item:
-                    // handle second-level labrador menu item
-                    break;
-                case R.id.golden_menu_item:
-                    // handle second-level golden menu item
-                    break;
-                case R.id.calico_menu_item:
-                    // handle second-level calico menu item
-                    break;
-                case R.id.cheshire_menu_item:
-                    // handle second-level cheshire menu item
-                    break;*/
-                default:
-                    return true;
-            }
-        }
-        // Good practice to pass through to super if not handled
-        return super.onMenuItemSelected(featureId, item);
     }
 
 }
