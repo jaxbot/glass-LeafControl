@@ -13,7 +13,7 @@
         <activity
             android:name=".StartHVACActivity"
             android:icon="@drawable/ic_glass_logo"
-            android:label="@string/title_activity_main" >
+            android:label="Start Climate Control" >
             <intent-filter>
                 <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
             </intent-filter>
@@ -23,9 +23,9 @@
                 android:resource="@xml/voice_trigger" />
         </activity>
         <activity
-            android:name=".MainActivity2"
+            android:name=".StopHVACActivity"
             android:icon="@drawable/ic_glass_logo"
-            android:label="Start Climate Control" >
+            android:label="Stop Climate Control" >
             <intent-filter>
                 <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
             </intent-filter>
