@@ -49,6 +49,8 @@ public class StartHVACActivity extends Activity implements TextToSpeech.OnInitLi
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
+                Carwings carwings = new Carwings(activity);
+                carwings.startAC(true);
                 activity.runOnUiThread(new Runnable() {
                     public void run() {
                         showDone();

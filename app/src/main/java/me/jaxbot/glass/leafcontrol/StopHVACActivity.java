@@ -35,6 +35,16 @@ public class StopHVACActivity extends Activity {
         buildView();
         setContentView(mView);
 
+        final Activity activity = this;
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                Carwings carwings = new Carwings(activity);
+                carwings.startAC(false);
+                return null;
+            }
+        }.execute(null, null, null);
+
     }
 
     @Override
