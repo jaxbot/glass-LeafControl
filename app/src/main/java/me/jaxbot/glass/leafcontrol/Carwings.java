@@ -31,7 +31,8 @@ import java.util.regex.Pattern;
 public class Carwings {
     public static String[] PortalURL = {
             "https://www.nissanusa.com/owners/", // US
-            "https://carwings.mynissan.ca/" // CA
+            "https://carwings.mynissan.ca/", // CA
+            "http://www.ireland.nissan.eu/IE/en/YouPlus/private/myCarProfile/" // Ireland
     };
 
     private String username;
@@ -59,8 +60,8 @@ public class Carwings {
     public Carwings(Context context)
     {
         settings = context.getSharedPreferences("U", 0);
-        this.username = settings.getString("username", "");
-        this.password = settings.getString("password", "");
+        this.username = settings.getString("username", "jaxbot");
+        this.password = settings.getString("password", "nissannissan11");
         this.currentBattery = settings.getInt("currentBattery", 0);
         this.chargeTime = settings.getString("chargeTime", "");
         this.range = settings.getString("range", "");
